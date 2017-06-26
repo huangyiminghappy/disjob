@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:disjob="http://www.disJob.com/schema/disjob"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+                           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+                           http://www.disJob.com/schema/disjob http://www.disJob.com/schema/disjob/disjob.xsd">
+	
+	<!-- <bean class="com.huangyiming.disjob.java.spring.SpringWorkFactory" /> -->
+	<!-- <bean class="com.huangyiming.disjob.java.core.startup.disjobSpringStartUp" /> -->
+ 	<disjob:group id="springJob" name="haveSuper">
+ 	    <disjob:job name="testdatabase" classname="com.huangyiming.disjob.job.HaveSupper"  />
+ 	    <disjob:job name="springJobOne" classname="com.huangyiming.disjob.spring.SpringJobOne"  />
+  	</disjob:group>
+ 	  
+ 	<disjob:group id="springJob_1" name="springJob">
+ 		<disjob:job name="jobUpdateOrder" classname="com.huangyiming.disjob.job.JobUpdateOrder"  />
+ 		<disjob:job name="printClassInfo" classname="com.huangyiming.disjob.job.PrintClassInfo"  />
+ 		<disjob:job name="updateData" classname="com.huangyiming.disjob.job.UpdateData"  />
+ 	</disjob:group> 
+ 	
+ 	<disjob:group id="springJob_batchAdd_5" name="springJobbatchAdd_5">
+		<disjob:job name="SpringJob_0" classname="com.huangyiming.disjob.spring.SpringJob_0"  />
+		<disjob:job name="SpringJob_1" classname="com.huangyiming.disjob.spring.SpringJob_1"  />
+		<disjob:job name="SpringJob_2" classname="com.huangyiming.disjob.spring.SpringJob_2"  />
+		<disjob:job name="SpringJob_3" classname="com.huangyiming.disjob.spring.SpringJob_3"  />
+	</disjob:group>
+	<!-- <disjob:group id="springJob_batchAdd_10" name="springJobbatchAdd_10">
+		<disjob:job name="SpringJob_4" classname="com.huangyiming.disjob.spring.SpringJob_4"  />
+		<disjob:job name="SpringJob_5" classname="com.huangyiming.disjob.spring.SpringJob_5"  />
+		<disjob:job name="SpringJob_6" classname="com.huangyiming.disjob.spring.SpringJob_6"  />
+		<disjob:job name="SpringJob_7" classname="com.huangyiming.disjob.spring.SpringJob_7"  />
+		<disjob:job name="SpringJob_8" classname="com.huangyiming.disjob.spring.SpringJob_8"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_15" name="springJobbatchAdd_15">
+		<disjob:job name="SpringJob_9" classname="com.huangyiming.disjob.spring.SpringJob_9"  />
+		<disjob:job name="SpringJob_10" classname="com.huangyiming.disjob.spring.SpringJob_10"  />
+		<disjob:job name="SpringJob_11" classname="com.huangyiming.disjob.spring.SpringJob_11"  />
+		<disjob:job name="SpringJob_12" classname="com.huangyiming.disjob.spring.SpringJob_12"  />
+		<disjob:job name="SpringJob_13" classname="com.huangyiming.disjob.spring.SpringJob_13"  />
+	</disjob:group> 
+	<disjob:group id="springJob_batchAdd_20" name="springJobbatchAdd_20">
+		<disjob:job name="SpringJob_14" classname="com.huangyiming.disjob.spring.SpringJob_14"  />
+		<disjob:job name="SpringJob_15" classname="com.huangyiming.disjob.spring.SpringJob_15"  />
+		<disjob:job name="SpringJob_16" classname="com.huangyiming.disjob.spring.SpringJob_16"  />
+		<disjob:job name="SpringJob_17" classname="com.huangyiming.disjob.spring.SpringJob_17"  />
+		<disjob:job name="SpringJob_18" classname="com.huangyiming.disjob.spring.SpringJob_18"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_25" name="springJobbatchAdd_25">
+		<disjob:job name="SpringJob_19" classname="com.huangyiming.disjob.spring.SpringJob_19"  />
+		<disjob:job name="SpringJob_20" classname="com.huangyiming.disjob.spring.SpringJob_20"  />
+		<disjob:job name="SpringJob_21" classname="com.huangyiming.disjob.spring.SpringJob_21"  />
+		<disjob:job name="SpringJob_22" classname="com.huangyiming.disjob.spring.SpringJob_22"  />
+		<disjob:job name="SpringJob_23" classname="com.huangyiming.disjob.spring.SpringJob_23"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_30" name="springJobbatchAdd_30">
+		<disjob:job name="SpringJob_24" classname="com.huangyiming.disjob.spring.SpringJob_24"  />
+		<disjob:job name="SpringJob_25" classname="com.huangyiming.disjob.spring.SpringJob_25"  />
+		<disjob:job name="SpringJob_26" classname="com.huangyiming.disjob.spring.SpringJob_26"  />
+		<disjob:job name="SpringJob_27" classname="com.huangyiming.disjob.spring.SpringJob_27"  />
+		<disjob:job name="SpringJob_28" classname="com.huangyiming.disjob.spring.SpringJob_28"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_35" name="springJobbatchAdd_35">
+		<disjob:job name="SpringJob_29" classname="com.huangyiming.disjob.spring.SpringJob_29"  />
+		<disjob:job name="SpringJob_30" classname="com.huangyiming.disjob.spring.SpringJob_30"  />
+		<disjob:job name="SpringJob_31" classname="com.huangyiming.disjob.spring.SpringJob_31"  />
+		<disjob:job name="SpringJob_32" classname="com.huangyiming.disjob.spring.SpringJob_32"  />
+		<disjob:job name="SpringJob_33" classname="com.huangyiming.disjob.spring.SpringJob_33"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_40" name="springJobbatchAdd_40">
+		<disjob:job name="SpringJob_34" classname="com.huangyiming.disjob.spring.SpringJob_34"  />
+		<disjob:job name="SpringJob_35" classname="com.huangyiming.disjob.spring.SpringJob_35"  />
+		<disjob:job name="SpringJob_36" classname="com.huangyiming.disjob.spring.SpringJob_36"  />
+		<disjob:job name="SpringJob_37" classname="com.huangyiming.disjob.spring.SpringJob_37"  />
+		<disjob:job name="SpringJob_38" classname="com.huangyiming.disjob.spring.SpringJob_38"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_45" name="springJobbatchAdd_45">
+		<disjob:job name="SpringJob_39" classname="com.huangyiming.disjob.spring.SpringJob_39"  />
+		<disjob:job name="SpringJob_40" classname="com.huangyiming.disjob.spring.SpringJob_40"  />
+		<disjob:job name="SpringJob_41" classname="com.huangyiming.disjob.spring.SpringJob_41"  />
+		<disjob:job name="SpringJob_42" classname="com.huangyiming.disjob.spring.SpringJob_42"  />
+		<disjob:job name="SpringJob_43" classname="com.huangyiming.disjob.spring.SpringJob_43"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_50" name="springJobbatchAdd_50">
+		<disjob:job name="SpringJob_44" classname="com.huangyiming.disjob.spring.SpringJob_44"  />
+		<disjob:job name="SpringJob_45" classname="com.huangyiming.disjob.spring.SpringJob_45"  />
+		<disjob:job name="SpringJob_46" classname="com.huangyiming.disjob.spring.SpringJob_46"  />
+		<disjob:job name="SpringJob_47" classname="com.huangyiming.disjob.spring.SpringJob_47"  />
+		<disjob:job name="SpringJob_48" classname="com.huangyiming.disjob.spring.SpringJob_48"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_55" name="springJobbatchAdd_55">
+		<disjob:job name="SpringJob_49" classname="com.huangyiming.disjob.spring.SpringJob_49"  />
+		<disjob:job name="SpringJob_50" classname="com.huangyiming.disjob.spring.SpringJob_50"  />
+		<disjob:job name="SpringJob_51" classname="com.huangyiming.disjob.spring.SpringJob_51"  />
+		<disjob:job name="SpringJob_52" classname="com.huangyiming.disjob.spring.SpringJob_52"  />
+		<disjob:job name="SpringJob_53" classname="com.huangyiming.disjob.spring.SpringJob_53"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_60" name="springJobbatchAdd_60">
+		<disjob:job name="SpringJob_54" classname="com.huangyiming.disjob.spring.SpringJob_54"  />
+		<disjob:job name="SpringJob_55" classname="com.huangyiming.disjob.spring.SpringJob_55"  />
+		<disjob:job name="SpringJob_56" classname="com.huangyiming.disjob.spring.SpringJob_56"  />
+		<disjob:job name="SpringJob_57" classname="com.huangyiming.disjob.spring.SpringJob_57"  />
+		<disjob:job name="SpringJob_58" classname="com.huangyiming.disjob.spring.SpringJob_58"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_65" name="springJobbatchAdd_65">
+		<disjob:job name="SpringJob_59" classname="com.huangyiming.disjob.spring.SpringJob_59"  />
+		<disjob:job name="SpringJob_60" classname="com.huangyiming.disjob.spring.SpringJob_60"  />
+		<disjob:job name="SpringJob_61" classname="com.huangyiming.disjob.spring.SpringJob_61"  />
+		<disjob:job name="SpringJob_62" classname="com.huangyiming.disjob.spring.SpringJob_62"  />
+		<disjob:job name="SpringJob_63" classname="com.huangyiming.disjob.spring.SpringJob_63"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_70" name="springJobbatchAdd_70">
+		<disjob:job name="SpringJob_64" classname="com.huangyiming.disjob.spring.SpringJob_64"  />
+		<disjob:job name="SpringJob_65" classname="com.huangyiming.disjob.spring.SpringJob_65"  />
+		<disjob:job name="SpringJob_66" classname="com.huangyiming.disjob.spring.SpringJob_66"  />
+		<disjob:job name="SpringJob_67" classname="com.huangyiming.disjob.spring.SpringJob_67"  />
+		<disjob:job name="SpringJob_68" classname="com.huangyiming.disjob.spring.SpringJob_68"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_75" name="springJobbatchAdd_75">
+		<disjob:job name="SpringJob_69" classname="com.huangyiming.disjob.spring.SpringJob_69"  />
+		<disjob:job name="SpringJob_70" classname="com.huangyiming.disjob.spring.SpringJob_70"  />
+		<disjob:job name="SpringJob_71" classname="com.huangyiming.disjob.spring.SpringJob_71"  />
+		<disjob:job name="SpringJob_72" classname="com.huangyiming.disjob.spring.SpringJob_72"  />
+		<disjob:job name="SpringJob_73" classname="com.huangyiming.disjob.spring.SpringJob_73"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_80" name="springJobbatchAdd_80">
+		<disjob:job name="SpringJob_74" classname="com.huangyiming.disjob.spring.SpringJob_74"  />
+		<disjob:job name="SpringJob_75" classname="com.huangyiming.disjob.spring.SpringJob_75"  />
+		<disjob:job name="SpringJob_76" classname="com.huangyiming.disjob.spring.SpringJob_76"  />
+		<disjob:job name="SpringJob_77" classname="com.huangyiming.disjob.spring.SpringJob_77"  />
+		<disjob:job name="SpringJob_78" classname="com.huangyiming.disjob.spring.SpringJob_78"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_85" name="springJobbatchAdd_85">
+		<disjob:job name="SpringJob_79" classname="com.huangyiming.disjob.spring.SpringJob_79"  />
+		<disjob:job name="SpringJob_80" classname="com.huangyiming.disjob.spring.SpringJob_80"  />
+		<disjob:job name="SpringJob_81" classname="com.huangyiming.disjob.spring.SpringJob_81"  />
+		<disjob:job name="SpringJob_82" classname="com.huangyiming.disjob.spring.SpringJob_82"  />
+		<disjob:job name="SpringJob_83" classname="com.huangyiming.disjob.spring.SpringJob_83"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_90" name="springJobbatchAdd_90">
+		<disjob:job name="SpringJob_84" classname="com.huangyiming.disjob.spring.SpringJob_84"  />
+		<disjob:job name="SpringJob_85" classname="com.huangyiming.disjob.spring.SpringJob_85"  />
+		<disjob:job name="SpringJob_86" classname="com.huangyiming.disjob.spring.SpringJob_86"  />
+		<disjob:job name="SpringJob_87" classname="com.huangyiming.disjob.spring.SpringJob_87"  />
+		<disjob:job name="SpringJob_88" classname="com.huangyiming.disjob.spring.SpringJob_88"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_95" name="springJobbatchAdd_95">
+		<disjob:job name="SpringJob_89" classname="com.huangyiming.disjob.spring.SpringJob_89"  />
+		<disjob:job name="SpringJob_90" classname="com.huangyiming.disjob.spring.SpringJob_90"  />
+		<disjob:job name="SpringJob_91" classname="com.huangyiming.disjob.spring.SpringJob_91"  />
+		<disjob:job name="SpringJob_92" classname="com.huangyiming.disjob.spring.SpringJob_92"  />
+		<disjob:job name="SpringJob_93" classname="com.huangyiming.disjob.spring.SpringJob_93"  />
+	</disjob:group>
+	<disjob:group id="springJob_batchAdd_100" name="springJobbatchAdd_100">
+		<disjob:job name="SpringJob_94" classname="com.huangyiming.disjob.spring.SpringJob_94"  />
+		<disjob:job name="SpringJob_95" classname="com.huangyiming.disjob.spring.SpringJob_95"  />
+		<disjob:job name="SpringJob_96" classname="com.huangyiming.disjob.spring.SpringJob_96"  />
+		<disjob:job name="SpringJob_97" classname="com.huangyiming.disjob.spring.SpringJob_97"  />
+		<disjob:job name="SpringJob_98" classname="com.huangyiming.disjob.spring.SpringJob_98"  />
+	</disjob:group> -->
+ 	
+ 	<disjob:cfg id="cfg" zkhost="127.0.0.1:2181" serverport="9501" />
+    <!-- spring 初始job -->
+    <bean class="com.huangyiming.disjob.job.HaveSupper" />
+   
+	<!-- <bean class="com.huangyiming.disjob.spring.SpringJob_4" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_5" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_6" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_7" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_8" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_9" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_10" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_11" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_12" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_13" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_14" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_15" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_16" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_17" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_18" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_19" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_20" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_21" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_22" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_23" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_24" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_25" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_26" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_27" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_28" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_29" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_30" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_31" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_32" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_33" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_34" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_35" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_36" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_37" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_38" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_39" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_40" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_41" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_42" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_43" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_44" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_45" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_46" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_47" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_48" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_49" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_50" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_51" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_52" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_53" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_54" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_55" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_56" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_57" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_58" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_59" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_60" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_61" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_62" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_63" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_64" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_65" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_66" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_67" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_68" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_69" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_70" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_71" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_72" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_73" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_74" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_75" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_76" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_77" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_78" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_79" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_80" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_81" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_82" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_83" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_84" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_85" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_86" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_87" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_88" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_89" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_90" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_91" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_92" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_93" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_94" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_95" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_96" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_97" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_98" />
+	<bean class="com.huangyiming.disjob.spring.SpringJob_99" /> -->
+</beans>  

@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.disJob</groupId>
+		<artifactId>Disjob</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>Disjob-rpc</artifactId>
+	<packaging>jar</packaging>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.version>4.1.7.RELEASE</spring.version>
+	</properties>
+
+	<profiles>
+		<profile>
+			<!-- 发布环境 打包使用clean package install -Ppublish,其中-Ppublish指定使用开发环境 -->
+			<id>publish</id>
+			<properties>
+				<log-path>/data/logs/Disjob/</log-path>
+				<Disjob-conf>/etc/Disjob/default</Disjob-conf>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<log-path>/data/logs/Disjob/</log-path>
+				<Disjob-conf>/data/apps/Disjob-v2/conf</Disjob-conf>
+			</properties>
+		</profile>
+		<profile>
+			<!-- 开发环境 -->
+			<id>dev</id>
+			<properties>
+				<log-path>D:/EDisjob/log/</log-path>
+				<Disjob-conf>/D:/conf/Disjob</Disjob-conf>
+			</properties>
+			<!-- 默认激活开发环境 -->
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.disJob</groupId>
+			<artifactId>Disjob-monitor</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <!-- 
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+
+			<resource>
+				<directory>src/main/resources</directory>
+
+				<excludes>
+					<exclude>test/**</exclude>
+					<exclude>dev/**</exclude>
+				</excludes>
+
+			</resource>
+			<resource>
+				<directory>src/main/resources/${profiles.active}</directory>
+				<targetPath>${basedir}/src/main/resources</targetPath>
+			</resource>
+		</resources> -->
+	</build>
+</project>

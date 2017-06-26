@@ -1,0 +1,22 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+	<display-name>Archetype Created Web Application</display-name>
+	<!-- <context-param>
+	  	<param-name>ejobConfig</param-name>
+	  	<param-value>E:\__work_space_middleware\EJob1.1Dev\Ejob-java-web\src\main\resources\META-INF\ejob.properties</param-value>
+	</context-param>
+	<listener>
+	 	<listener-class>com.huangyiming.disjob.java.core.startup.EjobServletContextListener</listener-class>
+	</listener> -->
+	
+	<context-param>
+        <param-name>contextConfigLocation</param-name>
+         	<param-value>classpath*:META-INF/spring-web.xml</param-value>
+    </context-param>
+	<listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+</web-app>

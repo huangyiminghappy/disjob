@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx.xsd
+						http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.huangyiming.disjob.monitor" />
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<mybatis:scan base-package="com.huangyiming.disjob.monitor.db.mappers" />
+	<!-- SQL模板类 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	<!-- SQL会话工厂配置 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- SqlSessionFactory的数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 配置typeAliasesPackage -->
+		<!-- typeAliasesPackage包路径配置 -->
+		<property name="typeAliasesPackage" value="com.huangyiming.disjob.monitor.db.domain,com.huangyiming.disjob.monitor.rms.pojo" />
+		<property name="mapperLocations" value="classpath*:com.huangyiming.disjob.monitor.db.mappers/*.xml" /><!-- 结果映射配置文件 -->
+	</bean>
+
+	<!-- mybatis自带的连接池 <bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource"> 
+		<property name="driver" value="${jdbc.driverClassName}" /> <property name="url" 
+		value="${jdbc.url}" /> <property name="username" value="${jdbc.username}" 
+		/> <property name="password" value="${jdbc.password}" /> </bean> -->
+	<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource"
+		destroy-method="close">
+		<!-- 数据库驱动 -->
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<!-- 相应驱动的jdbcUrl -->
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<!-- 数据库的用户名 -->
+		<property name="username" value="${jdbc.username}" />
+		<!-- 数据库的密码 -->
+		<property name="password" value="${jdbc.password}" />
+		<!-- 检查数据库连接池中空闲连接的间隔时间，单位是分，默认值：240，如果要取消则设置为0 这两个值跟数据库里的show global variables 
+			like "wait_timeout";密切相关 如果在wait_timeout秒期间内，数据库连接(java.sql.Connection)一直处于等待状态，mysql就将该连接关闭。这时，你的Java应用的连接池仍然合法地持有该连接的引用 
+			目前数据库服务器设置的是14400s 4小时没活动就关闭连接所以每过500分去检查按一次240分钟内没有被使用的连接关闭掉 -->
+		<property name="idleConnectionTestPeriodInSeconds" value="30" />
+		
+		<!-- 测试语句 -->
+		<property name="connectionTestStatement" value="SELECT 1" />
+		
+		<!-- 连接最长保持时间 -->
+	    <property name="maxConnectionAgeInSeconds" value="180" />
+		
+		
+		<!-- 连接池中未使用的链接最大存活时间，单位是分，默认值：60，如果要永远存活设置为0 -->
+		<property name="idleMaxAge" value="10" />
+		<!-- 每个分区最大的连接数 -->
+		<property name="maxConnectionsPerPartition" value="60" />
+		<!-- 每个分区最小的连接数 -->
+		<property name="minConnectionsPerPartition" value="20" />
+		<!-- 分区数 ，默认值2，最小1，推荐3-4，视应用而定 -->
+		<property name="partitionCount" value="4" />
+		<!-- 每次去拿数据库连接的时候一次性要拿几个,默认值：2 -->  <!-- 5 -->
+		<property name="acquireIncrement" value="5" />
+		<!-- 缓存prepared statements的大小，默认值：0 -->
+		<property name="statementsCacheSize" value="100" />
+		<!-- 每个分区释放链接助理进程的数量，默认值：3，除非你的一个数据库连接的时间内做了很多工作，不然过多的助理进程会影响你的性能 -->
+		<property name="releaseHelperThreads" value="3" />
+		<!-- 获取连接的时候最多等待时间,ms为单位 -->
+		<property name="connectionTimeoutInMs" value="20000" />
+	</bean>
+
+	<!-- <bean id="diamond" class="com.huangyiming.disjob.monitor.diamond.DiamondServer">
+		<property name="filePath" value="${ejob-conf}" />
+		<property name="groups" value="${diamond-group}" />
+		<property name="dataIds" value="${diamond-dataids}" />
+	</bean> -->
+</beans>

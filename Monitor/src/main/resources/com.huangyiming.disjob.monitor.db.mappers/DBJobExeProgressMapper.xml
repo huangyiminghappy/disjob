@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.huangyiming.disjob.monitor.db.mappers.DBJobExeProgressMapper">
+	
+	<resultMap type="DBJobExeProgress" id="DBJobExeProgressResult">
+  		<id property="id" column="pk_id"/>
+		<result property="uuid" column="ix_uuid"/>
+		<result property="createdAt" column="ix_created_at"/>
+		<result property="businessSip" column="ix_business_sip"/>
+		<result property="dataTime" column="ix_data_time"/>
+		<result property="type" column="ix_type"/>
+		<result property="content" column="ix_content"/>
+  	</resultMap>
+	
+	
+	<select id="findAllPage" parameterType="hashmap" resultMap="DBJobExeProgressResult">
+    	select * from ejob_job_exeprogress order by ix_created_at desc limit #{pageOffset},#{pageSize}
+  	</select>
+	<select id="findByUuid" parameterType="String" resultMap="DBJobExeProgressResult">
+    	select * from ejob_job_exeprogress where ix_uuid=#{uuid}
+  	</select>
+	
+	<insert id="insert" parameterType="DBJobExeProgress" useGeneratedKeys="true" keyProperty="pk_id">
+		insert into ejob_job_exeprogress(ix_uuid,ix_created_at,ix_business_sip,ix_data_time,ix_type,ix_content) 
+		values(#{uuid},#{createdAt},#{businessSip},#{dataTime},#{type},#{content})
+	</insert>
+	<update id="update" parameterType="DBJobExeProgress">
+		update ejob_job_exeprogress set ix_uuid=#{uuid}, ix_business_sip=#{businessSip}, ix_data_time=#{dataTime}, ix_type=#{type}, ix_content=#{content} where pk_id=#{id}
+  	</update>
+	<delete id="delete" parameterType="long">
+  		delete from ejob_job_exeprogress where pk_id=#{id}
+  	</delete>
+</mapper>

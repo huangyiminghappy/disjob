@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.huangyiming.disjob.monitor.db.mappers.DBJobAlarmMapper">
+	
+	<resultMap type="DBJobAlarmMapping" id="DBJobAlarmMappingResult">
+		<result property="createdAt" column="ix_created_at"/>
+		<result property="updatedAt" column="ix_updated_at"/>
+		<result property="groupName" column="pk_group_name"/>
+		<result property="onOff" column="ix_is_alarm"/>
+		<result property="alarmRtx" column="ix_alarm_rtx"/>
+  	</resultMap>
+	
+	<select id="findAll" parameterType="hashmap" resultMap="DBJobAlarmMappingResult">
+    	select * from ejob_job_alarm_mapping limit #{pageOffset},#{pageSize}
+  	</select>
+	<insert id="insert" parameterType="DBJobAlarmMapping">
+		insert into ejob_job_alarm_mapping(pk_group_name,ix_created_at,ix_updated_at,ix_is_alarm,ix_alarm_rtx)
+  		values(#{groupName},#{createdAt},#{updatedAt},#{onOff},#{alarmRtx})
+  	</insert>
+	<update id="update" parameterType="DBJobAlarmMapping">
+  		update ejob_job_alarm_mapping 
+  		<set>
+  			ix_updated_at=#{updatedAt},
+		    <if test="alarmRtx != null and alarmRtx != '' ">ix_alarm_rtx=#{alarmRtx},</if>
+		    ix_is_alarm=#{onOff}
+      	</set>
+      	where pk_group_name=#{groupName}
+  	</update>
+	<delete id="delete" parameterType="String">
+  		delete from ejob_job_alarm_mapping where pk_group_name=#{groupName}
+  	</delete>
+  	<select id="search" parameterType="String" resultMap="DBJobAlarmMappingResult">
+    	select * from ejob_job_alarm_mapping where pk_group_name=#{groupName}
+  	</select>
+  	<select id="getAllSize" resultType="long">
+    	select count(1) from ejob_job_alarm_mapping
+  	</select>
+</mapper>

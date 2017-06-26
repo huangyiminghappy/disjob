@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.huangyiming.disjob.monitor.db.mappers.DBJobBasicInfoMapper">
+	
+	<resultMap type="DBJobBasicInfo" id="DBJobBasicInfoResult">
+  		<id property="uuid" column="pk_uuid"/>
+		<result property="groupName" column="ix_group_name"/>
+		<result property="jobName" column="ix_job_name"/>
+		<result property="createdAt" column="ix_created_at"/>
+		<result property="updatedAt" column="ix_updated_at"/>
+		<result property="scheduleSip" column="ix_schedule_sip"/>
+		<result property="businessSip" column="ix_business_sip"/>
+		<result property="scheduleStart" column="ix_schedule_start"/>
+		<result property="scheduleEnd" column="ix_schedule_end"/>
+		<result property="executeStart" column="ix_execute_start"/>
+		<result property="executeEnd" column="ix_execute_end"/>
+		<result property="timeConsuming" column="ix_time_consuming"/>
+		<result property="currentStatus" column="ix_current_status"/>
+		<result property="errorLocation" column="ix_error_location"/>
+		<result property="errorType" column="ix_error_type"/>
+		<result property="errorReason" column="ix_error_reason"/>
+		<result property="isTimeout" column="ix_is_timeout"/>
+		<result property="jobRecvTime" column="ix_recvtime"/>
+		<result property="killprocess" column="ix_killprocess"/>
+		<result property="sharingRequestId" column="ix_sharing_requestid"/>
+		
+  	</resultMap>
+	
+	<select id="findAllPage" parameterType="hashmap" resultMap="DBJobBasicInfoResult">
+    	select * from ejob_job_basicinfo order by ix_created_at desc limit #{pageOffset},#{pageSize}
+  	</select>
+	<select id="findByGnameAndJnamePage" parameterType="hashmap" resultMap="DBJobBasicInfoResult">
+    	select * from ejob_job_basicinfo where ix_group_name=#{gName} and ix_job_name=#{jName} order by ix_created_at desc limit #{pageOffset},#{pageSize}
+  	</select>
+	<select id="findByTimePage" parameterType="hashmap" resultMap="DBJobBasicInfoResult">
+    	select * from ejob_job_basicinfo where ix_group_name=#{gName} and ix_job_name=#{jName} and ix_execute_start &gt;= #{sTime} and ix_execute_end &lt;= #{eTime} order by ix_created_at desc limit #{pageOffset},#{pageSize}
+  	</select>
+	<select id="findByUuid" parameterType="String" resultMap="DBJobBasicInfoResult">
+    	select * from ejob_job_basicinfo where pk_uuid=#{uuid}
+  	</select>
+  	<select id="getTheLeastScheduler" parameterType="hashmap" resultMap="DBJobBasicInfoResult">
+    	select * from ejob_job_basicinfo where ix_group_name=#{group} and ix_job_name=#{jobName} ORDER BY ix_created_at DESC LIMIT 1
+  	</select>
+	<select id="findSuccessJobsPage" parameterType="hashmap" resultMap="DBJobBasicInfoResult">
+    	select * from ejob_job_basicinfo where ix_current_status=1 order by ix_created_at desc limit #{pageOffset},#{pageSize}
+  	</select>
+	<select id="findFailJobsPage" parameterType="hashmap" resultMap="DBJobBasicInfoResult">
+    	select * from ejob_job_basicinfo where ix_current_status=0 order by ix_created_at desc limit #{pageOffset},#{pageSize}
+  	</select>
+	<insert id="insert" parameterType="DBJobBasicInfo">
+		insert into ejob_job_basicinfo(pk_uuid,ix_group_name,ix_job_name,ix_created_at,ix_updated_at,ix_schedule_sip,ix_business_sip,ix_schedule_start,ix_schedule_end,ix_execute_start,ix_execute_end,ix_time_consuming,ix_current_status,ix_error_location,ix_error_type,ix_error_reason,ix_recvtime,ix_is_timeout,ix_sharing_requestid)
+  		values(#{uuid},#{groupName},#{jobName},#{createdAt},#{updatedAt},#{scheduleSip},#{businessSip},#{scheduleStart},#{scheduleEnd},#{executeStart},#{executeEnd},#{timeConsuming},#{currentStatus},#{errorLocation},#{errorType},#{errorReason},#{jobRecvTime},#{isTimeout},#{sharingRequestId})
+  	</insert>
+	<update id="update" parameterType="DBJobBasicInfo">
+  		update ejob_job_basicinfo 
+  		<set>
+      		<if test="scheduleSip != null and scheduleSip != '' ">ix_schedule_sip=#{scheduleSip},</if>
+		    <if test="businessSip != null and businessSip != '' ">ix_business_sip=#{businessSip},</if>
+		    <if test="scheduleStart != null and scheduleStart != '' ">ix_schedule_start=#{scheduleStart},</if>
+		    <if test="scheduleEnd != null and scheduleEnd != '' ">ix_schedule_end=#{scheduleEnd},</if>
+		    <if test="executeStart != null and executeStart != '' ">ix_execute_start=#{executeStart},</if>
+		    <if test="executeEnd != null and executeEnd != '' ">ix_execute_end=#{executeEnd},</if>
+		    <if test="currentStatus != null and currentStatus != '' ">ix_current_status=#{currentStatus},</if>
+		    <if test="errorLocation != null and errorLocation != '' ">ix_error_location=#{errorLocation},</if>
+		    <if test="errorType != null and errorType != '' ">ix_error_type=#{errorType},</if>
+		    <if test="errorReason != null and errorReason != '' ">ix_error_reason=#{errorReason},</if>
+		    <if test="jobRecvTime != null and jobRecvTime != '' ">ix_recvtime=#{jobRecvTime},</if>
+		    <if test="sharingRequestId != null and sharingRequestId != '' ">ix_sharing_requestid=#{sharingRequestId},</if>
+		    <if test="killprocess != 0">ix_killprocess=#{killprocess},</if>
+		    <if test="timeConsuming !=0">ix_time_consuming=#{timeConsuming},</if> 
+		    ix_updated_at=#{updatedAt},
+      	</set>
+      	where pk_uuid=#{uuid}
+  	</update>
+	<delete id="delete" parameterType="String">
+  		delete from ejob_job_basicinfo where pk_uuid=#{uuid}
+  	</delete>
+	<select id="getFailSize" resultType="long">
+    	select count(*) from ejob_job_basicinfo where ix_current_status=0
+  	</select>
+	<select id="getSuccessSize" resultType="long">
+    	select count(*) from ejob_job_basicinfo where ix_current_status=1
+  	</select>
+	<select id="getAllSizeByWhere" parameterType="hashmap" resultType="long">
+  		select count(*) from ejob_job_basicinfo where ix_group_name=#{gName} and ix_job_name=#{jName} and ix_execute_start &gt;= #{sTime} and ix_execute_end &lt;= #{eTime}
+  	</select>
+  	<select id="getAllSize" resultType="long">
+    	select count(*) from ejob_job_basicinfo
+  	</select>
+  	<select id="latestExeResult" parameterType="hashmap" resultType="int">
+    	select count(1) from ejob_job_basicinfo where ix_group_name=#{gName} and ix_job_name=#{jName} and ix_execute_end is null and  ix_error_type is null and ix_is_timeout=0
+  	</select>
+  	<select id="batchUpdateIsTimeOut" parameterType="hashmap">
+    	update ejob_job_basicinfo set ix_is_timeout=1 where ix_group_name=#{gName} and ix_job_name=#{jName} and ix_execute_end is null and  ix_error_type is null and ix_is_timeout=0
+  	</select>
+  	<update id="updateJobTimeOut">
+  		update ejob_job_basicinfo set ix_is_timeout=1 where pk_uuid=#{pk_uuid}
+  	</update>
+  	<select id="findJobGroupByRequestId" parameterType="string" resultType="string">
+    	select ix_group_name from ejob_job_basicinfo where pk_uuid=#{requestId}
+  	</select>
+</mapper>

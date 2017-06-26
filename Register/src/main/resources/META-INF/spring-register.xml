@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+                           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+    
+    <import resource="classpath:META-INF/spring-rpc.xml" />
+    
+    <!-- dev -->
+    <!-- 加载注解功能 -->
+	<aop:aspectj-autoproxy />
+	<context:spring-configured />
+	<context:annotation-config />
+	
+	<context:component-scan base-package="com.huangyiming.disjob.register.*" />
+	
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>  
+    
+	<!-- ======================== 创建 scheduler======================== -->
+	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"><!-- 指定scheduler标识 和scheduler工厂类 -->
+		<property name="configLocation" value="file:${Disjob-conf}/quartz-conf.properties"></property><!-- ======显示的指定quartz的配置文件======= -->
+	</bean>
+	
+ <!--   <bean id="serverZKRegistry" class="com.huangyiming.disjob.register.center.ServerZKRegistry">
+		<property name="znodeApi" ref="znodeApi"></property>
+		
+		<property name="watchApi" ref="watchApi"></property>
+		
+		<property name="zookeeperRegistry" ref="zookeeperRegistry"></property>
+		
+ 		
+		<property name="subscribeService" ref="subscribeService"></property>
+		
+ 		   		   		   		   	    
+		 <property name="generalSchedulerService" ref="generalSchedulerService"></property>
+   		 
+   			<property name="configLocation" value="file:${ejob-conf}/zoopkeeper-conf.properties"></property> 
+   	
+   </bean>	 -->
+ 
+</beans>
+
+

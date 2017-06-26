@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans	
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+	
+	<!-- <import resource="classpath:META-INF/spring-register.xml" /> -->
+	
+	<!-- Scans the classpath of this application for @Components to deploy as beans -->
+	<context:component-scan base-package="com.huangyiming.disjob.console" />
+
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="false">
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/service/**"/><!-- web.xml的servlet中已经配置了/app/*的过滤路径，所以此处拦截只需要以/app/为开头的其他路径 -->
+            <bean class="com.huangyiming.disjob.console.web.interceptor.CuratorClientInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+	
+	<!-- Resolver将把输出结果与输出界面相融合，为表现层提供呈现资源,Resolves view names to protected .jsp resources within the /WEB-INF/views directory -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- <property name="viewClass"> <value>org.springframework.web.servlet.view.JstlView</value></property> 此处JSP，可选
+		org.springframework.web.servlet.view.freemarker.FreeMarkerView（用于基于FreeMarker模板的表现层实现）
+		org.springframework.web.servlet.view.velocity.VelocityView（用于基于velocity模板的表现层实现）-->
+		<property name="prefix" value="/view/"/><!-- 指定了表现层资源的前缀和后缀，运行时，Spring 将为指定的表现层资源自动追加前缀和后缀，以形成一个完整的资源路径。 -->
+		<property name="suffix" value=".jsp"/>
+	</bean>
+</beans>

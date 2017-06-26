@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.huangyiming.disjob.monitor.db.mappers.DBMonitorAlarmMapper">
+	
+	<insert id="insert" parameterType="DBMonitorAlarmInfo">
+		insert into ejob_job_alarm(ix_product_code,ix_monitor_point_code,ix_error_code,ix_description,ix_application,ix_available)
+  		values(#{productCode},#{pointCode},#{errorCode},#{description},#{application},#{available})
+  	</insert>
+  	
+  	<select id="findByIndex" parameterType="DBMonitorAlarmInfo" resultType="DBMonitorAlarmInfo">
+    	select 
+    	ix_product_code productCode,
+    	ix_monitor_point_code pointCode,
+    	ix_error_code errorCode,
+    	ix_description description,
+    	ix_application application,
+    	ix_available available,
+    	pk_id as 'index'
+    	from ejob_job_alarm where pk_id = #{index}
+  	</select>
+</mapper>

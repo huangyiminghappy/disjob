@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.huangyiming.disjob.monitor.db.mappers.DBRMSMonitorMapper">
+
+	<select id="getProjectCode" resultType="string" parameterType="string">
+    	select ix_project_code from ejob_rms_group_mapping where ix_job_group = #{groupName}
+  	</select>
+  	
+	<select id="getTokenByProjectCode" resultType="string" parameterType="string">
+    	select ix_token from ejob_rms_project_info where ix_project_code = #{projectCode}
+  	</select>
+  	
+  	<resultMap type="DBMonitorErrorInfo" id="DBMonitorErrorInfo">
+		<result property="pointCode" column="ix_point_code"/>
+		<result property="errorCode" column="ix_error_code"/>
+		<result property="description" column="ix_description"/>
+  	</resultMap>
+  	<resultMap type="RMSMonitorInfo" id="RMSMonitorInfo">
+		<result property="projectCode" column="ix_project_code"/>
+		<result property="pointCode" column="ix_point_code"/>
+		<result property="errorCode" column="ix_error_code"/>
+		<result property="token" column="ix_token"/>
+		<result property="description" column="ix_description"/>
+		<result property="available" column="ix_available"/>
+  	</resultMap>
+	<select id="getMonitorErrorInfo" resultType="DBMonitorErrorInfo" parameterType="string">
+    	select 
+    		ix_point_code pointCode,
+    		ix_error_code errorCode,
+    		ix_description description,
+    	 	ix_available available,
+    	 	ix_is_test '0',
+    	 	ix_send_condition sendCondition
+    	 	from ejob_rms_errorcode where pk_id = #{monitorIndex}
+  	</select>
+	<select id="getProjectCodeByGroupName" resultType="string" parameterType="string">
+    	select ix_project_code from ejob_rms_group_mapping where ix_job_group=#{groupName}
+  	</select>
+  	<select id="getSelfTestMonitorInfo" resultType="RMSMonitorInfo" >
+    	select 
+    		pro.ix_project_code projectCode,
+    		err.ix_point_code pointCode,
+    		err.ix_error_code errorCode,
+    		err.ix_description description,
+    		err.ix_send_condition sendCondition,
+    		pro.ix_token token from
+		(select ix_point_code,ix_error_code,ix_test_project_code,ix_description,ix_send_condition from ejob_rms_errorcode where ix_is_test = '1') 
+		err left join ejob_rms_project_info pro on err.ix_test_project_code = pro.pk_id
+  	</select>
+
+</mapper>

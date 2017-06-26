@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.huangyiming.disjob.monitor.db.mappers.DBUserPermitMapper">
+	
+	<resultMap type="DBUserPermit" id="DBUserPermit">
+  		<id property="id" column="pk_id"/>
+		<result property="username" column="ix_user"/>
+		<result property="permitItem" column="ix_permititem"/>
+  	</resultMap>
+	
+	<insert id="insert" parameterType="DBUserPermit">
+		insert into ejob_job_userpermit(ix_user,ix_permititem)
+  		values(#{username},#{permitItem})
+  	</insert>
+  	
+  	<delete id="delete" parameterType="DBUserPermit">
+		delete from ejob_job_userpermit where ix_user = #{username} and ix_permititem = #{permitItem}
+  	</delete>
+	
+	<select id="select" parameterType="DBUserPermit" resultType="DBUserPermit">
+		select 
+				pk_id id,
+				ix_user username,
+				ix_permititem permitItem
+				from ejob_job_userpermit where ix_user = #{username} and ix_permititem = #{permitItem}
+  	</select>
+</mapper>

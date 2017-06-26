@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.disJob.com/schema/ejob"  
+    targetNamespace="http://www.disJob.com/schema/ejob"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"  
+    xmlns:beans="http://www.springframework.org/schema/beans"  
+    elementFormDefault="qualified"  
+    attributeFormDefault="unqualified"  
+    version="1.0">  
+  
+    <xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"/>  
+    
+ 
+  <xsd:element name="group">  
+        <xsd:complexType>  
+            <xsd:complexContent>  
+                <xsd:extension base="abstractServiceType">
+				<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+					<xsd:element ref="job" minOccurs="0" maxOccurs="unbounded" />
+ 				</xsd:sequence>
+			</xsd:extension>
+            </xsd:complexContent>  
+        </xsd:complexType>  
+    </xsd:element>  
+  
+  <xsd:element name="job" type="jobType">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ The service url parameter ]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="jobType">
+		<xsd:attribute name="name" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ The parameter value. ]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="group" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ The parameter value. ]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="classname" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ The parameter value. ]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="cron" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ cron express then scheduler beased on]]> </xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+  	<xsd:complexType name="abstractServiceType">
+		<xsd:attribute name="id" type="xsd:ID" use="required">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ The unique identifier for a bean. ]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="name" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ The full name of the class of service interface. ]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+	</xsd:complexType>
+	
+	<xsd:element name="cfg">
+		<xsd:complexType>
+			<xsd:attribute name="zkhost" type="xsd:string" use="required" />
+			<xsd:attribute name="serverport" type="xsd:string" use="optional" />
+			<xsd:attribute name="zkrootnode" type="xsd:string" use="optional" />
+			<xsd:attribute name="clustername" type="xsd:string" use="optional" />
+			<xsd:attribute name="corePoolSize" type="xsd:string" use="optional" />
+			<xsd:attribute name="maxPoolSize" type="xsd:string" use="optional" />
+			<xsd:attribute name="keepAliveTime" type="xsd:string" use="optional" />
+		</xsd:complexType>
+	</xsd:element> 
+</xsd:schema>
+ 
+ 	
+	 

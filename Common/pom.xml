@@ -1,0 +1,142 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>  
+  <parent>  
+    <groupId>com.disJob</groupId>  
+    <artifactId>Disjob</artifactId>  
+    <version>0.0.1-SNAPSHOT</version>  
+   </parent>
+   <artifactId>Disjob-common</artifactId>  
+ 	<packaging>jar</packaging>  
+	<version>0.0.1-SNAPSHOT</version>
+  
+  <properties>  
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
+    <httpclient.version>4.2.5</httpclient.version>
+  </properties>    
+ 
+  <dependencies>  
+   <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>${httpclient.version}</version>
+		</dependency>
+        <dependency>
+    	   <groupId>com.fasterxml.jackson.core</groupId>
+    	   <artifactId>jackson-core</artifactId>
+           <version>2.7.0</version>
+        </dependency>
+        <dependency>
+        	<groupId>com.huangyiming</groupId>
+		    <artifactId>Disjob-quence</artifactId>
+		    <version>1.0.0</version>
+        </dependency>
+        <dependency>
+			<groupId>com.huangyiming</groupId>
+			<artifactId>Disjob-event</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+        <dependency>
+           <groupId>com.fasterxml.jackson.core</groupId>
+           <artifactId>jackson-databind</artifactId>
+           <version>2.7.0</version>
+        </dependency>
+        <dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+        <dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+	    <dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.0</version>
+		</dependency>
+		<dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.2</version>
+        </dependency>
+        <!-- http://mvnrepository.com/artifact/org.springframework/spring-aspects -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- diamond依赖包，其中diamond的包已经添加到私有仓库nexus -->
+	<!-- 	<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.6</version>
+			</dependency> -->
+		<dependency>
+				<groupId>commons-httpclient</groupId>
+				<artifactId>commons-httpclient</artifactId>
+				<version>3.1</version>
+			</dependency>
+		<!-- <dependency>
+			<groupId>com.taobao.diamond</groupId>
+			<artifactId>diamond-client</artifactId>
+			<version>2.0.5.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.taobao.diamond</groupId>
+			<artifactId>diamond-deployer</artifactId>
+			<version>2.0.5.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.taobao.diamond</groupId>
+			<artifactId>diamond-sdk</artifactId>
+			<version>2.0.5.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.taobao.diamond</groupId>
+			<artifactId>diamond-utils</artifactId>
+			<version>2.0.5.4</version>
+		</dependency> -->
+  </dependencies>  
+  
+  <build>
+        <resources>
+           <resource>
+              <directory>src/main/resources</directory>
+              <includes>    
+                 <include>**/*.xml</include>
+                 <include>**/*.properties</include>    
+              </includes>    
+           </resource>
+       </resources>
+  </build>
+</project>

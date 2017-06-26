@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:disjob="http://www.disJob.com/schema/disjob"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.disJob.com/schema/disjob http://www.disJob.com/schema/disjob/disjob.xsd">
+	
+	<context:component-scan base-package="com.huangyiming.disjob.service" />
+	
+	<!-- job 所在的包 -->
+	<context:component-scan base-package="com.huangyiming.disjob.spring.*" name-generator="com.huangyiming.disjob.java.spring.disjobAnnoBeanNameGenerator"/>
+	
+	<!-- 配置 disjob spring 启动类 -->
+	<bean class="com.huangyiming.disjob.java.core.startup.disjobSpringStartUp" />
+	<!-- 基本配置信息，packages 属性，如果多个包 请用 分号  隔开 -->
+	<disjob:cfg id="cfg" zkhost="127.0.0.1:2181" serverport="9501" />
+</beans>

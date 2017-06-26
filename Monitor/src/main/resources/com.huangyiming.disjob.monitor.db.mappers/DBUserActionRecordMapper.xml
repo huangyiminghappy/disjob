@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.huangyiming.disjob.monitor.db.mappers.DBUserActionRecordMapper">
+	
+	<resultMap type="DBUserActionRecord" id="DBUserActionRecord">
+  		<result property="id" column="pk_id"/>
+		<result property="username" column="ix_username"/>
+		<result property="permitItem" column="ix_permitItem"/>
+		<result property="result" column="ix_result"/>
+		<result property="actionDate" column="ix_actiondate"/>
+		<result property="actionParam" column="ix_action_param"/>
+		<result property="host" column="ix_host"/>
+		<result property="addr" column="ix_addr"/>
+  	</resultMap>
+  	
+  	<insert id="insert" parameterType="DBUserActionRecord">
+		insert into ejob_user_action_record(pk_id, ix_username,ix_permitItem,ix_result,ix_actiondate,ix_action_param,ix_host,ix_addr)
+  		values(#{id},#{username},#{permitItem},#{result},#{actionDate},#{actionParam},#{host},#{addr})
+  	</insert>
+	
+	<select id="selectUserActionRecordByPaging" parameterType="hashmap" resultType="DBUserActionRecord">
+		select 
+				record.pk_id id,
+				record.ix_username username,
+				permititem.ix_description permitItem,
+				record.ix_actiondate actionDate,
+				record.ix_action_param actionParam,
+				record.ix_host host,
+				record.ix_addr addr
+				from ejob_user_action_record record
+				left join ejob_job_permititem permititem
+				on record.ix_permitItem = permititem.pk_id
+				<where>  
+		            <if test="search != null">  
+		                record.ix_username like '%${search}%'  or record.ix_action_param like '%${search}%' 
+		            </if>
+            	</where>
+            	order by ix_actiondate DESC 
+				limit #{offset},#{limit} 
+  	</select>
+  	<select id="selectUserActionRecordCount" parameterType="hashmap" resultType="int">
+				select count(record.pk_id) from (select 
+				record.pk_id
+				from ejob_user_action_record record
+				<where>  
+		            <if test="search != null">  
+		                record.ix_username like '%${search}%'  or record.ix_action_param like '%${search}%' 
+		            </if>
+            	</where>
+				) record
+  	</select>
+</mapper>
