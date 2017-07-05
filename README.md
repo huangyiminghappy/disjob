@@ -1,5 +1,5 @@
 # DisJob
-github地址变更为:https://github.com/chunfengchui/disjob<br/>
+
 DisJob 是一个基于Quartz、Netty、ZooKeeper的分布式rpc调度job框架，是目前业内极少使用tcp协议来做异步RPC调度的框架，因为基于tcp协议，所以支持多语言，多语言系统间定时调用非常方便。在整个集团有java版本和php版本，支撑着数十个团队，数万个job的运行。目前只开源java版本。容易要支持PHP或者python等版本，只需要根据协议写服务端代码即可。支持多语言<br/>
 # 一、项目背景
 disjob分布式任务调度概述<br/>
