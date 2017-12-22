@@ -106,7 +106,7 @@ disjob 后台管理模块，在后台对job进行管理、监控、登陆等都�
 #### 2、解压disjob.zip文件放入pom指定环境的配置文件中
 　　如pom的profiles标签中有三种环境可配置,根据实际环境在指定路径配置conf文件，如在 <Disjob-conf>D:/conf/Disjob</Disjob-conf>路径下放入 　　　　disjob.zip 中的jdbc.properties等文件。
 ### 5、编译打包
-最后对DisJob的pom文件 所在路径下执行mvn clean package install -Ppublish -X -Dmaven.test.skip=true(这里是执行publish环境)
+最后对DisJob的pom文件 所在路径下执行mvn clean package install -Ppublish -X(这里是执行publish环境)
 ##### disjob后台效果:
    ![](https://raw.githubusercontent.com/huangyiminghappy/DisJob/master/imgs/job%E7%AE%A1%E7%90%86.png)
   
